@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} Links {% endblock title %}
+
+{% block container %}
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-4 is-offset-4">
+                    <div class="tags has-addons">
+                        <a href="{% url 'short:redirect' code=object.code %}"  target="_blank" class="tag is-large"> {{ request.META.HTTP_HOST }}</a>
+                        <span class="tag is-info is-large">{{ object.code }}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+    </section>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        let chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                datasets: [{
+                    label: 'Redirecciones',
+                    backgroundColor: 'rgb(32, 156, 238)',
+                    borderColor: 'rgb(32, 156, 238)',
+                    data: [0, 0, 0, 0, 0, "{{ july }}", 0, 0, 0, 0, 0, 0]
+                }]
+            },
+            options: {}
+        })
+    </script>
+{% endblock container %}
